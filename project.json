@@ -1,0 +1,178 @@
+{
+    "ProjectName": "PyMate",
+    "Description": "A Python-based CoPilot system for developers",
+    "OSCompatibility": ["Windows", "Linux", "macOS"],
+    "StartDate": "2023-09-27",
+    "Design": {
+        "Window": {
+            "Moveable and Resizable": "Allows for user flexibility in positioning the window.",
+            "Docking Capability": "Enables the window to dock to the sides of the OS screen.",
+            "Always on Top": "Checkbox to keep the window above other applications."
+        },
+        "System": {
+            "System Tray Presence": "The app will always run in the System Tray to avoid taskbar clutter.",
+            "Notification Support": "Provides alerts for long tasks or important updates."
+        },
+        "UI Features": {
+            "Text-to-Speech Support": "Speak checkbox for spoken responses.",
+            "Adaptive UI": "Adaptive sizing based on docking status. Separate settings for docked width and window size.",
+            "Drag-and-Drop Support": "Allows users to drag and drop files into the chat window for further actions.",
+            "Keyboard Shortcuts": "Enables quick navigation and actions through keyboard shortcuts."
+        },
+        "Advanced Features": {
+            "Task Manager": "A sub-window accessible via a toolbar button at the bottom, showing currently running tasks.",
+            "Contextual Menus": "Right-click menus for quick tasks and custom actions.",
+            "Multi-Tab Support": "Separate chat windows within the main one, with the ability to drag out into separate windows or drag in to consolidate."
+        },
+        "Additional": {
+            "Custom Actions": "Ability to create custom tasks from a prompt and an action.",
+            "Toolbar": "A toolbar at the bottom for quick access to features like the Task Manager."
+        }
+    },
+    "Features": {
+        "EverydayUserFeatures": {
+            "File Search": "Search for files and within files based on user-defined criteria.",
+            "Image Search with CLIP AI": "Use CLIP AI for image recognition and search capabilities.",
+            "Running Apps Interaction": "Interact with the list of running apps to perform actions.",
+            "OCR for Window Information": "Use OCR to read window information for task execution.",
+            "Input Area Detection": "Locate input areas for text or mouse actions.",
+            "Text and Data Extraction": "Extract text or data from various file formats.",
+            "Task Reminders and Quick Notes": "Combined feature with an optional timer for reminders.",
+            "Clipboard Manager": "Manage clipboard history and automate paste-related tasks."
+        },
+        "DeveloperMode": {
+            "Developer Mode Toggle": "Unlock developer-specific features via a setting in the toolbar.",
+            "Data Backup": "Option in settings to export pyMate data for backup."
+        },
+        "AdditionalFeatures": {
+            "User Profiles": "Multiple profiles with a default option for startup.",
+            "Built-in Tutorial": "A chat-based tutorial or walkthrough on first run.",
+            "Voice Commands": "Explore local and secure AI options for voice recognition."
+        }
+    },
+    "Functionality": {
+        "CoreFunctionalities": {
+            "OS Compatibility": "Ensure compatibility with multiple operating systems.",
+            "Extensibility": "Design for modularity and future feature additions.",
+            "Offline Mode": "Core functionalities should work offline.",
+            "Performance": "Optimize for low CPU and memory usage.",
+            "Data Storage": "Use an SQLite database stored in a 'data' folder within the app.",
+            "Multi-threading": "Utilize multi-threading for better performance and responsiveness."
+        },
+        "AdvancedFunctionalities": {
+            "Error Handling": "Implement robust error handling and logging mechanisms.",
+            "Security": "Implement strong encryption and other security measures."
+        }
+    },
+        "FutureConsiderations": {
+        "Localization": "Support for multiple languages.",
+        "Updates": "Implement an auto-update feature.",
+        "Accessibility": "Make the tool accessible to users with disabilities."
+    },
+    "TechnologyStack": {
+        "ProgrammingLanguage": "Python",
+        "GUIFramework": "PyQt",
+        "Database": "SQLite",
+        "VoiceRecognition": "Mozilla DeepSpeech",
+        "OCR": "Tesseract",
+        "ImageRecognition": "CLIP AI",
+        "MultiThreading": "Python's built-in 'threading' library",
+        "Security": "Python's built-in 'cryptography' library"
+    },
+    "Tasks": [
+        {
+            "Task": "Configuration",
+            "Description": "Responsible for creating/updating the database. All database code will be in 'modules/database.py'. Use default data for a new database or read settings from it.",
+            "Status": "Pending"
+        },
+        {
+            "Task": "Initialization",
+            "Description": "Load database settings and any required AI models. Implement a timer to unload AI models when not in use to save resources.",
+            "Status": "Pending"
+        },
+        {
+            "Task": "UI Handling",
+            "Description": "Scripts for handling UI events will be in the 'modules/UI' folder.",
+            "Status": "Pending"
+        },
+        {
+            "Task": "DeepSpeech",
+            "Description": "Implement Mozilla DeepSpeech functionalities. Will be added after the UI is developed.",
+            "Status": "Pending"
+        },
+        {
+            "Task": "Security",
+            "Description": "Use Python's 'cryptography' library to encrypt saved prompts and other sensitive data.",
+            "Status": "Pending"
+        },
+        {
+            "Task": "Main Function",
+            "Description": "Create the main.py file with a base window, resize, docking, etc. capabilities.",
+            "Status": "Pending"
+        }
+    ],
+    "chatGPT": [
+        {
+          "Date": "2023-09-27",
+          "Time": "17:24",
+          "Description": "Initial discussion about the project, including naming and the creation of project.json",
+          "NextSteps": "Decide on the project name and create project.json"
+        },
+        {
+            "Date": "2023-09-27",
+            "Time": "19:13",
+            "Description": "Discussed the project concept, design, features, functionality, and technology stack. Decided to use Python, PyQt, SQLite, Mozilla DeepSpeech, Tesseract, and CLIP AI. Also opted for Python's built-in 'threading' and 'cryptography' libraries for multi-threading and security.",
+            "NextSteps": "Setting up the development environment, initial prototyping with PyQt and Mozilla DeepSpeech, and starting incremental development."
+        },
+        {
+            "Date": "2023-09-27",
+            "Time": "20:44",
+            "Description": "Modified run.bat to run Python script in 'windowless' mode in the background while keeping the virtual environment. Updated window.py to handle UI in system tray with 'Exit' menu. Resolved the issue of command window hanging.",
+            "NextSteps": "Develop the UI window using PyQt."
+        },
+        {
+            "Date": "2023-09-27",
+            "Time": "21:47",
+            "Description": "Created initial UI setup with PyQt. Implemented system tray icon with context menu. Added functionality for docking and undocking the main window. Developed the system for saving and restoring window settings.",
+            "NextSteps": "Implement UI features in detail, including buttons, menus, and other functionalities."
+        },
+        {
+            "Date": "2023-09-27",
+            "Time": "21:50",
+            "Description": "Implemented docking functionality to the existing Dock menu actions. Modified the Dock and Undock actions to use the set_docking function for actual docking and undocking.",
+            "NextSteps": "Implement further UI elements and functionalities, and begin work on integrating AI models."
+        },
+        {
+            "Date": "2023-09-27",
+            "Time": "23:04",
+            "Description": "Debugging PyQt application. Identified issues related to window resizing on restart.",
+            "Files": ["main.py", "window.py"],
+            "NextSteps": "Resizing to past size when restarting the app is not working."
+        },
+        {
+            "Date": "2023-09-28",
+            "Time": "02:00",
+            "Description": "Worked on implementing window docking and undocking features in PyMate. Added functionalities to save and restore window settings from a database. Encountered issues with restoring the window's size and position correctly on startup.",
+            "NextSteps": "Fix window size and position on startup."
+          },
+          {
+            "Date": "2023-09-28",
+            "Time": "03:13",
+            "Description": "Discussed the issues related to window docking in PyQt5. Identified that the window's geometry is not being restored correctly upon startup. Suggested several debugging steps to diagnose the issue.",
+            "NextSteps": "Investigate why the docking window is not displaying correctly on startup. Implement the debugging suggestions to identify the root cause."
+        },
+        {
+            "Date": "2023-09-28",
+            "Time": "15:32:00",
+            "Description": "Worked on restoring window settings and implemented the 'Always On-Top' feature. Encountered issues with restoring dock states.",
+            "NextSteps": "Create a settings toolbar button, make a settings window, and maybe add different users on start-up. (Settings and window settings will need to be a per user option.)"
+        }          
+      ],
+    "chatGPT_instruction": [
+      {
+        "System": "Show response count only at the end of the actual response.",
+        "Style": "Feel free to add emojs and other fun stuff to make the chat more funny."
+      }
+    ]
+  }
+  
