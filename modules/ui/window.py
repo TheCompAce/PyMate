@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, QAction, QMessageBox, QToolBar, QToolButton, QWidget, QSizePolicy, QCheckBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, QAction, QMessageBox, QToolBar, QToolButton, QWidget, QSizePolicy, QCheckBox, QTextEdit, QPushButton, QFrame
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QPoint, QSize, QTimer
 import sys
@@ -20,15 +20,45 @@ class MyMainWindow(QMainWindow):
         super(MyMainWindow, self).__init__(*args, **kwargs)
         self.session = session
         self.setWindowTitle('PyMate')
+        self.setWindowIcon(QIcon('res/icon.png'))
         QTimer.singleShot(100, self.post_show_init)
 
         self.always_on_top_checkbox = QCheckBox("Always On-Top")
         self.always_on_top_checkbox.stateChanged.connect(self.toggle_always_on_top)
 
+         # Import and add ChatContainer
+        from modules.ui.chat import ChatContainer
+        self.chat_container = ChatContainer(self)
+        self.chat_container.setGeometry(0, 20, self.width(), self.height() - 140)
+        self.chat_container.show()
+        self.chat_container.repaint()
+
+        self.rich_textbox = QTextEdit(self)
+        self.rich_textbox.setGeometry(0, self.height() - 100, self.width() - 100, 100)
+        # Create an "Ask" button next to the textbox
+        self.ask_button = QPushButton("Ask", self)
+        self.ask_button.setGeometry(self.width() - 100, self.height() - 100, 100, 100)
+
+
         self.settings_button = QToolButton(self)
         self.settings_button.setText('Settings')
         self.settings_button.move(0, self.height() - self.settings_button.height())
         self.settings_button.clicked.connect(self.open_settings_window)
+
+        self.chat_container.raise_()
+
+    def resizeEvent(self, event):
+        global is_startup
+        self.chat_container.setGeometry(5, 25, self.width() - 10, self.height() - 155)
+        self.chat_container.show()
+        self.chat_container.repaint()
+        self.rich_textbox.setGeometry(10, self.height() - 120, self.width() - 110, 100)
+        self.ask_button.setGeometry(self.width() - 95, self.height() - 115, 90, 90)
+        
+
+        if not is_startup:
+            save_window_settings_after_resize(self.session, self)
+
 
     def open_settings_window(self):
         logging.debug("Triggered: open_settings_window")
@@ -70,11 +100,6 @@ class MyMainWindow(QMainWindow):
         event.ignore()
         self.hide()
 
-    def resizeEvent(self, event):
-        global is_startup
-        if not is_startup:
-            save_window_settings_after_resize(self.session, self)
-
     def moveEvent(self, event):
         save_window_settings_after_resize(self.session, self)
 
@@ -105,10 +130,6 @@ def InitUI(session):
 
     # Add the "Always On-Top" checkbox to the toolbar
     toolbar.addWidget(main_window.always_on_top_checkbox)
-
-
-    
-    
     
     # Initialize QToolBar and add it to the bottom of QMainWindow
     toolbar = QToolBar()
