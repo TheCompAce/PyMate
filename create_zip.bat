@@ -1,1 +1,1 @@
-python tools\create_zip.py -d .\ -o pyMate.zip -e env,__pycache__,.vscode,pyMate.zip,system.db
+python tools\create_zip.py -d .\ -o pyMate.zip -e env,__pycache__,.vscode,pyMate.zip,system.db,.git

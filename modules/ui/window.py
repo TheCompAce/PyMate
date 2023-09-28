@@ -7,6 +7,7 @@ import json
 from enum import Enum
 
 from modules.database import save_window_settings, get_window_settings
+from modules.ui.settings import SettingsWindow
 
 just_undocked = False
 is_startup = True
@@ -23,6 +24,18 @@ class MyMainWindow(QMainWindow):
 
         self.always_on_top_checkbox = QCheckBox("Always On-Top")
         self.always_on_top_checkbox.stateChanged.connect(self.toggle_always_on_top)
+
+        self.settings_button = QToolButton(self)
+        self.settings_button.setText('Settings')
+        self.settings_button.move(0, self.height() - self.settings_button.height())
+        self.settings_button.clicked.connect(self.open_settings_window)
+
+    def open_settings_window(self):
+        logging.debug("Triggered: open_settings_window")
+        # Create and show the settings dialog
+        
+        self.settings_dialog = SettingsWindow(self)
+        self.settings_dialog.show()
 
     def toggle_always_on_top(self, state):
         global is_on_top
@@ -88,16 +101,21 @@ def InitUI(session):
 
     # Initialize QToolBar and add it to the bottom of QMainWindow
     toolbar = QToolBar()
-    main_window.addToolBar(Qt.BottomToolBarArea, toolbar)
+    main_window.addToolBar(Qt.TopToolBarArea, toolbar)
 
     # Add the "Always On-Top" checkbox to the toolbar
     toolbar.addWidget(main_window.always_on_top_checkbox)
 
+
+    
     
     
     # Initialize QToolBar and add it to the bottom of QMainWindow
     toolbar = QToolBar()
     main_window.addToolBar(Qt.BottomToolBarArea, toolbar)
+
+    # Add the "Settings" button to the toolbar
+    toolbar.addWidget(main_window.settings_button)
 
     # Initialize QToolButton for docking and add it to the right of the toolbar
     dock_button = QToolButton()
