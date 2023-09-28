@@ -10,7 +10,7 @@ Current Version: **1.0.0**
 Unknown Author
 
 ## License
-MIT License
+Apache License
 
 ## Future Development
 This project is continuously evolving, and we aim to make it a great application in the near future. Your contributions will help us achieve that goal faster.
