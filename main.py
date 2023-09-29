@@ -1,7 +1,11 @@
-from modules.database import CreateDatabase
-from modules.ui.window import InitUI
 import logging
 import sys
+
+from PyQt5.QtWidgets import QDialog, QApplication
+from modules.database import CreateDatabase
+from modules.ui.users import UserSelectionWindow
+from modules.ui.window import InitUI
+
 
 # Configure logging at the very beginning
 logging.basicConfig(
@@ -27,8 +31,20 @@ sys.excepthook = exception_hook
 logging.debug("Exception hook set.")
 
 def main():
+    app = QApplication([])
+
     session = CreateDatabase()
-    InitUI(session)
+    # Initialize User Selection
+    user_selection = UserSelectionWindow(session)
+    result = user_selection.exec_()
+
+    if result == QDialog.Accepted:
+        selected_user_id = user_selection.get_selected_user_id()
+        # Fetch settings and load main window based on selected_user_id
+        InitUI(session, selected_user_id)
+        sys.exit(app.exec_())
+    else:
+        sys.exit(0)  # Exit the application if 'Cancel' is clicked
 
 if __name__ == "__main__":
     try:

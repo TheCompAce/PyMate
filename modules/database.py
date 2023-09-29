@@ -4,11 +4,12 @@ import json
 import logging
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from modules.data.data import WindowSettings
 import os
 from PyQt5.QtCore import QPoint, QSize
 
 from modules.data.data import User
+from modules.data.data import WindowSettings
+from modules.data.data import ensure_default_user
 
 # Define an Enum for dock areas
 class DockArea(Enum):
@@ -40,6 +41,9 @@ def CreateDatabase():
     # Create a session to interact with the database
     Session = sessionmaker(bind=engine)
     session = Session()
+
+    # Ensure a default user exists
+    ensure_default_user(session)
 
     return session
 

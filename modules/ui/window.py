@@ -16,9 +16,10 @@ is_on_top = False
 QWIDGETSIZE_MAX = 16777215
 
 class MyMainWindow(QMainWindow):
-    def __init__(self, session, *args, **kwargs):
+    def __init__(self, session, selected_user_id, *args, **kwargs):
         super(MyMainWindow, self).__init__(*args, **kwargs)
         self.session = session
+        self.userId = selected_user_id
         self.setWindowTitle('PyMate')
         self.setWindowIcon(QIcon('res/icon.png'))
         QTimer.singleShot(100, self.post_show_init)
@@ -113,13 +114,13 @@ class DockArea(Enum):
 current_dock_location = DockArea.RIGHT
 is_docked = False
    
-def InitUI(session):
+def InitUI(session, selected_user_id):
     logging.debug("InitUI")
     # Initialize QApplication
     app = QApplication(sys.argv)
 
     # Initialize QMainWindow
-    main_window = MyMainWindow(session)
+    main_window = MyMainWindow(session, selected_user_id)
     main_window.setWindowTitle('PyMate')
     # restore_window_settings(session, main_window)
     

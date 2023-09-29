@@ -172,6 +172,12 @@
             "Time": "20:00:00",
             "Description": "Added a frame to the ChatContainer and discussed further development steps.",
             "NextSteps": "Implement User control for settings and chat logs, and then work on creating the chat control to show our chat history."
+        },
+        {
+            "Date": "2023-09-28",
+            "Time": "21:28:42",
+            "Description": "Implemented User selection window and linked it with settings. Also worked on improving the UI layout and added new features.",
+            "NextSteps": "Create the chat control, ensure settings are user-specific, and add UI for managing users in settings."
         }        
       ],
     "chatGPT_instruction": [
